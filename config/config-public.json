@@ -1,0 +1,11 @@
+{
+    "server" : {
+        "port" : 3000
+    },
+    "test" : {
+        "interval_cron" : "* * * * *",
+        "timeout" : 30000,
+        "download_speed_mbits" : 100,
+        "upload_speed_mbits" : 10
+    }
+}
