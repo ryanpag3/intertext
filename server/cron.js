@@ -7,7 +7,8 @@ tester.run();
 var testJob = new CronJob({
   cronTime: config.test.interval_cron,
   onTick: function() {
-        tester.run();
+      var includeAlerts = true;
+        tester.run(includeAlerts);
   },
   start: false,
   timeZone: 'America/Los_Angeles'
@@ -15,13 +16,13 @@ var testJob = new CronJob({
 testJob.start();
 console.log('cron - test job interval started.');
 
-var reportJob = new CronJob({
-  cronTime: config.report.interval_cron,
+var dataGenerateJob = new CronJob({
+  cronTime: config.data.interval_cron,
   onTick: function() {
-        // TODO
+      tester.run();
   },
   start: false,
   timeZone: 'America/Los_Angeles'
 });
-reportJob.start();
+dataGenerateJob.start();
 console.log('cron - report job interval started.');

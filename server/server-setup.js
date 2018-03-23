@@ -1,3 +1,5 @@
+var mysql = require('mysql');
+
 const runServerSetup = function() {
     require('./cron');
 }

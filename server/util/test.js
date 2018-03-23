@@ -3,18 +3,19 @@ var twilio = require('twilio');
 var q = require('q');
 var config = require('../../config/config-public.json');
 var configPrivate = require('../../config/config-private.json');
+var db = require('./db');
 var twilioClient = new twilio(configPrivate.twilio.account_sid, configPrivate.twilio.auth_token);
 
 const tester = {
-    run: function () {
+    run: function (includeAlerts) {
         var deferred = q.defer();
         var test = speedTest({
             maxTime: 10000
         });
 
         test.on('data', data => {
-            console.log(data);
-            if (!isAdvertisedSpeeds(data)) {
+            db.insertSpeedReport(data.speeds.download, data.speeds.upload);
+            if (!isAdvertisedSpeeds(data) && includeAlerts) {
                 sendSpeedAlert(data);
             }
         });
