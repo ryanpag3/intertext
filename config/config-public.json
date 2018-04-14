@@ -9,6 +9,6 @@
         "upload_speed_mbits" : 10
     },
     "data" : {
-        "interval_cron" : "* * * * *"
+        "interval_cron" : "0 * * * *"
     }
 }
